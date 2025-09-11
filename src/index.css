@@ -61,6 +61,30 @@ input {
   font-size: 14px;
 }
 
+input:placeholder-shown {
+  color: #e5e5e5;
+}
+
+input:focus {
+  outline: #adb5bd;
+  border-color: #adb5bd;
+}
+
+input:is(:-webkit-autofill, :autofill) {
+  -webkit-text-fill-color: #242424;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:disabled {
+  background-color: #dee2e6;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

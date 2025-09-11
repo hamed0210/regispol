@@ -8,29 +8,27 @@ import { Link } from "react-router-dom";
 
 import Styles from "./login.module.css";
 
+z.config(z.locales.es());
+
 const zodSchema = z.object({
     email: z
-        .string()
-        .min(1, { message: "Este campo es requrido" })
-        .min(6, { message: "Debe tener mas de 6 caracteres" })
-        .max(10, { message: "Debe tener maximo 10 caracteres" }),
-    // .regex(/^d+$/, { message: "Solo se aceptan numeros enteros" }),
+        .email().toLowerCase().trim(),
     password: z
-        .string()
+        .string().trim()
         .min(1, { message: "Este campo es requrido" })
         .min(6, { message: "Debe tener mas de 6 caracteres" }),
 });
 
-// const zodSchemaRequerido = zodSchema.required();
-
 const index = () => {
     const [verContraseña, setVerContraseña] = useState(false);
+    const [contraseñaType, setContraseñaType] = useState('password');
 
     const notificacion = () =>
         toast.error("Los datos ingresados son incorrectos", {
             // className={Styles.notificacion},
             theme: "light",
             pauseOnHover: false,
+            pauseOnFocusLoss: false,
             closeOnClick: true,
             closeButton: false,
             //   hideProgressBar: false,
@@ -38,8 +36,8 @@ const index = () => {
         });
 
     const data = {
-        usuario: "1046814387",
-        contraseña: "1234",
+        usuario: "hduran0210@gmail.com",
+        contraseña: "123456",
     };
 
     const {
@@ -48,31 +46,35 @@ const index = () => {
         // watch,
         formState: { errors, isSubmitting },
     } = useForm({
+        defaultValues: {
+            email: 'hduran0210@gmail.com',
+            password: '123456'
+        },
         resolver: zodResolver(zodSchema),
     });
 
-    const handleContraseña = (icon) => {
-        const inputContraseña = icon.target.parentNode.firstChild;
-
+    const handleContraseña = () => {
         if (verContraseña) {
             setVerContraseña(false);
-            inputContraseña.type = "password";
+            setContraseñaType('password')
         } else {
             setVerContraseña(true);
-            inputContraseña.type = "text";
+            setContraseñaType('text')
         }
+
     };
 
     const onSubmit = handleSubmit(async (datos) => {
-        // datos.id === data.usuario ? console.log("igaul") : console.log("no igaul");
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            // const result = zodSchema.safeParse(datos);
-            // if (result.success) {
-            // } else { }
-            console.log(datos);
+
+            datos.email === data.usuario ?
+                datos.password === data.contraseña
+                    ? console.log("igaul") : notificacion()
+                : notificacion();
+
         } catch (error) {
-            notificacion();
+            console.log(error)
             // setError("root", {
             //   message: "This email is already taken",
             // });
@@ -96,28 +98,29 @@ const index = () => {
                         <input
                             className={Styles.input}
                             type="email"
-                            placeholder="Escriba su correo"
+                            placeholder="Escriba su correo electrónico"
                             disabled={isSubmitting}
-                            {...register("email", { required: true })}
+                            {...register("email", {
+                                required: true,
+                            })}
                         />
                         <div className={Styles.labelGroup}>
                             <AtSign size={16} />
                             <span className={Styles.label}>Correo</span>
                         </div>
-                        {errors.id && (
-                            <span className={Styles.requerido}>{errors.id.message}</span>
+                        {errors.email && (
+                            <span className={Styles.requerido}>{errors.email.message}</span>
                         )}
                     </div>
                     <div className={Styles.inputGroup}>
                         <input
                             className={Styles.input}
                             placeholder="Escriba su contraseña"
-                            type="password"
+                            type={contraseñaType}
                             disabled={isSubmitting}
                             {...register("password", {
                                 required: {
                                     value: true,
-                                    message: "Este campo es requerido",
                                 },
                             })}
                         />
@@ -147,7 +150,7 @@ const index = () => {
                         disabled={isSubmitting}
                         type="submit"
                     >
-                        {isSubmitting ? <span className={Styles.loader}></span> : "Entrar"}
+                        {isSubmitting ? <><span className={Styles.loader} /> Entrando</> : "Entrar"}
                     </button>
                 </form>
             </div>
