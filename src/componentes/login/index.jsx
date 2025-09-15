@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 
 import Styles from "./login.module.css";
+import { supabase } from '../../supabase/supabase.config'
 
 z.config(z.locales.es());
 
@@ -48,7 +49,7 @@ const index = () => {
     } = useForm({
         defaultValues: {
             email: 'hduran0210@gmail.com',
-            password: '123456'
+            password: '910210Vaquero'
         },
         resolver: zodResolver(zodSchema),
     });
@@ -64,17 +65,20 @@ const index = () => {
 
     };
 
-    const onSubmit = handleSubmit(async (datos) => {
+    const onSubmit = handleSubmit(async ({ email, password }) => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            datos.email === data.usuario ?
-                datos.password === data.contraseña
-                    ? console.log("igaul") : notificacion()
-                : notificacion();
-
+            // datos.email === data.usuario ?
+            //     datos.password === data.contraseña
+            //         ? console.log("igaul") : notificacion()
+            //     : notificacion();
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+            error && notificacion()
         } catch (error) {
-            console.log(error)
             // setError("root", {
             //   message: "This email is already taken",
             // });
