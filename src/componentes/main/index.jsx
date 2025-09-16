@@ -1,14 +1,15 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Styles from './main.module.css'
-import Home from '../home'
+import Nuevos from '../nuevos'
 
 function App() {
 
   return (
     <div className={Styles.container}>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Navigate to={'../nuevos'} />} />
+        <Route path='/nuevos' element={<Nuevos />} />
       </Routes>
     </div>
   )

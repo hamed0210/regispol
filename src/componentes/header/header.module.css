@@ -6,6 +6,7 @@
   top: 0;
   left: 0;
   height: 3.125rem;
+  /* max-width: 1280px; */
   width: 100vw;
   padding: 0.313rem 1.25rem;
   background-color: white;
@@ -51,8 +52,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0.188rem 0;
-  border-radius: 1.875rem;
+  justify-content: center;
+  padding: 2px 0;
+  border-radius: 5px;
   text-decoration: none;
   color: #242424;
   box-sizing: border-box;
@@ -69,7 +71,6 @@
 }
 
 .listItem_nombre {
-  margin-left: 0.438rem;
   font-size: 15px;
   font-weight: 600;
   pointer-events: none;
@@ -86,11 +87,11 @@
 .selected {
   padding: 0 0.5rem;
   color: white;
-  background-color: #5a85f4;
+  background-color: #fca311;
 }
 
 .selected:hover {
-  background-color: #2558da;
+  background-color: #c98009;
 }
 
 .no_selected:hover {
