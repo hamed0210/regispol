@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     if (sessionUser) {
       setLoadingState(true)
-      navigate('/')
+      navigate('/nuevos')
     } else {
       setLoadingState(false)
       navigate('/login')

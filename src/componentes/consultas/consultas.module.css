@@ -1,0 +1,242 @@
+.notificacion_contenedor {
+  margin-top: 40px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 7rem);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.titulo {
+  margin: 0;
+  text-align: start;
+  font-family: "Righteous", system-ui;
+  color: #fca311;
+}
+
+.busqueda_contenedor {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #242424;
+  margin-top: 10px;
+}
+
+.fechas_busqueda_contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+  font-family: 'Antonio', sans-serif;
+}
+
+.fecha_busqueda_titulo {
+  font-size: 13px;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.input {
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: 2px solid rgba(36, 36, 36, .4);
+  font-size: 13px;
+  font-family: 'Antonio', sans-serif;
+}
+
+.input:is(:-webkit-autofill, :autofill) {
+  -webkit-text-fill-color: #242424;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input:focus {
+  outline: #ca7f07;
+  border-color: #ca7f07;
+}
+
+.lista_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.lista_item {
+  position: relative;
+  display: flex;
+  width: 280px;
+  margin: 15px;
+  border-radius: 10px;
+  background-color: white;
+  text-decoration: none;
+  font-family: 'Antonio', sans-serif;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.36);
+  box-sizing: border-box;
+}
+
+.lista_item_fecha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  padding: 5px 10px 10px;
+  border-radius: 10px 0 0 10px;
+  color: white;
+}
+
+.lista_item_fecha_dia {
+  /* display: flex; */
+  font-size: 36px;
+  font-weight: bolder;
+}
+
+.lista_item_fecha_mes_año_contenedor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.lista_item_fecha_mes {
+  /* position: absolute; */
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: translateY(-5px);
+}
+
+.lista_item_fecha_año {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.lista_item_resumen {
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  padding: 10px 20px 10px 10px;
+  text-align: left;
+}
+
+.lista_item_resumen p {
+  margin: 0;
+}
+
+.lista_item_resumen_titulo {
+  font-size: 12px;
+  font-weight: 500;
+  color: #96a3af;
+}
+
+.lista_item_resumen_nombre {
+  font-weight: 500;
+  color: #5a85f4;
+}
+
+.lista_item_resumen_colaboracion {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  color: #495057;
+}
+
+.colaboracion {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.lista_item_resumen_boton {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 20px;
+}
+
+.boton_borrar {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #ff4d6d;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.boton_borrar:hover {
+  color: #ee2f52;
+}
+
+.activo {
+  background-color: #5a85f4;
+}
+
+.desactivado {
+  background-color: #ced4da;
+}
+
+/* 
+
+
+Modal
+
+
+*/
+
+.contenedor_modal {
+  font-family: 'Antonio', sans-serif;
+}
+
+.icono_contenedor_modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icono_item_modal {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgba(255, 77, 109, 0.25);
+}
+
+.icono_modal {
+  color: #ff4d6d;
+}
+
+.contenido_contenedor_modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0 15px;
+}
+
+.contenido_titulo_modal {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.contenido_modal {
+  font-weight: 300;
+  color: #495057;
+}
+
+.btn_modal {
+  width: 100%;
+  padding: 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  background-color: #ff4d6d;
+}
