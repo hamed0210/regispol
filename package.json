@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@supabase/supabase-js": "^2.57.4",
+    "dayjs": "^1.11.18",
     "lucide-react": "^0.543.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

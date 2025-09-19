@@ -75,6 +75,7 @@
   background-color: white;
   text-decoration: none;
   font-family: 'Antonio', sans-serif;
+  cursor: pointer;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.36);
   box-sizing: border-box;
 }

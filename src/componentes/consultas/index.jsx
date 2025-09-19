@@ -1,12 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Trash } from 'lucide-react'
 import { ToastContainer, toast } from 'react-toastify'
+import dayjs from 'dayjs'
+import 'dayjs/locale/es';
+
+dayjs.locale('es');
 
 import Styles from './consultas.module.css'
+import { useColaboracionesStore } from '../../store/colaboracionesStore'
 // import Modal from '../../../hooks/modalHook'
 
 const index = () => {
   const [isModalOpen, setModalOpen] = useState(false)
+  const { getCollabs, colaboraciones } = useColaboracionesStore()
+
+  useEffect(() => {
+    getCollabs();
+  }, [getCollabs]);
+
+  const onSubmit = async () => {
+    // console.log(colaboraciones)
+  };
+
 
   const notificacion = () =>
     toast.success('Cita eliminada con exito', {
@@ -41,6 +56,12 @@ const index = () => {
       />
       <div className={Styles.container}>
         <h2 className={Styles.titulo}>Consultas</h2>
+        {/* <button onClick={onSubmit}
+          className={Styles.button}
+          type="submit"
+        >
+          entrar
+        </button> */}
         <div className={Styles.busqueda_contenedor}>
           <div className={Styles.fechas_busqueda_contenedor}>
             <span className={Styles.fecha_busqueda_titulo}>
@@ -60,58 +81,44 @@ const index = () => {
           </div>
         </div>
         <div className={Styles.lista_container}>
-          <div className={Styles.lista_item}>
-            <div className={`${Styles.lista_item_fecha} ${Styles.activo}`}>
-              <span className={Styles.lista_item_fecha_dia}>16</span>
-              <div className={Styles.lista_item_fecha_mes_año_contenedor}>
-                <span className={Styles.lista_item_fecha_mes}>Feb</span>
-                <span className={Styles.lista_item_fecha_año}>2024</span>
+          {
+            colaboraciones.map((colab) => (
+              // console.log(dayjs(colab.date_collab).format('MMM')),
+              <div key={colab.cod} className={Styles.lista_item}>
+                <div className={`${Styles.lista_item_fecha} ${Styles.activo}`}>
+                  <span className={Styles.lista_item_fecha_dia}>{
+                    colab.date_collab ? dayjs(colab.date_collab).format('DD') : '00'
+                  }</span>
+                  <div className={Styles.lista_item_fecha_mes_año_contenedor}>
+                    <span className={Styles.lista_item_fecha_mes}>{
+                      colab.date_collab ? dayjs(colab.date_collab).format('MMM') : '000'
+                    }</span>
+                    <span className={Styles.lista_item_fecha_año}>{
+                      colab.date_collab ? dayjs(colab.date_collab).format('YYYY') : '0000'
+                    }</span>
+                  </div>
+                </div>
+                <div className={Styles.lista_item_resumen}>
+                  <p className={Styles.lista_item_resumen_titulo}>Nombres</p>
+                  <p className={Styles.lista_item_resumen_nombre}>
+                    {`${colab.persons.names} ${colab.persons.surnames}`}
+                  </p>
+                  <p className={Styles.lista_item_resumen_colaboracion}>
+                    <span className={Styles.lista_item_resumen_titulo}>Colaboracion</span>
+                    <span className={Styles.colaboracion}>{colab.collab}</span>
+                  </p>
+                  {/* <span className={Styles.lista_item_resumen_boton}>
+                    <Trash
+                      onClick={handleAbrirModal}
+                      className={Styles.boton_borrar}
+                      size={16}
+                      strokeWidth={2.5}
+                    />
+                  </span> */}
+                </div>
               </div>
-            </div>
-            <div className={Styles.lista_item_resumen}>
-              <p className={Styles.lista_item_resumen_titulo}>
-                Nombre
-              </p>
-              <p className={Styles.lista_item_resumen_nombre}>
-                Dr. Alberto Jimenez
-              </p>
-              <p className={Styles.lista_item_resumen_colaboracion}>
-                <span className={Styles.lista_item_resumen_titulo}>Colaboracion</span>
-                <span className={Styles.colaboracion}>Angel Duran</span>
-              </p>
-              <span className={Styles.lista_item_resumen_boton}>
-                <Trash
-                  onClick={handleAbrirModal}
-                  className={Styles.boton_borrar}
-                  size={16}
-                  strokeWidth={2.5}
-                />
-              </span>
-            </div>
-          </div>
-          <div className={Styles.lista_item}>
-            <div
-              className={`${Styles.lista_item_fecha} ${Styles.desactivado}`}
-            >
-              <span className={Styles.lista_item_fecha_dia}>25</span>
-              <div className={Styles.lista_item_fecha_mes_año_contenedor}>
-                <span className={Styles.lista_item_fecha_mes}>Feb</span>
-                <span className={Styles.lista_item_fecha_año}>2024</span>
-              </div>
-            </div>
-            <div className={Styles.lista_item_resumen}>
-              <p className={Styles.lista_item_resumen_titulo}>
-                Nombre
-              </p>
-              <p className={Styles.lista_item_resumen_nombre}>
-                Dr. Alberto Jimenez
-              </p>
-              <p className={Styles.lista_item_resumen_colaboracion}>
-                <span className={Styles.lista_item_resumen_titulo}>Colaboracion</span>
-                <span className={Styles.colaboracion}>Angel Duran</span>
-              </p>
-            </div>
-          </div>
+            ))
+          }
         </div>
         {/* <Modal
           isOpen={isModalOpen}

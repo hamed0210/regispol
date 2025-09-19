@@ -4,7 +4,6 @@ import { AtSign, Lock, Eye, EyeOff } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
 
 import Styles from "./login.module.css";
 import { supabase } from '../../supabase/supabase.config'
@@ -35,11 +34,6 @@ const index = () => {
             //   hideProgressBar: false,
             autoClose: 3000,
         });
-
-    const data = {
-        usuario: "hduran0210@gmail.com",
-        contraseña: "123456",
-    };
 
     const {
         register,

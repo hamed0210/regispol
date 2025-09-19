@@ -14,10 +14,13 @@ const index = () => {
   const ref = useRef()
   let location = useLocation()
   const [submenuPerfil, setSubmenuPerfil] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleCerrarSesion = async () => {
+    setIsSubmitting(!isSubmitting)
     try {
       const { error } = await supabase.auth.signOut()
+      setIsSubmitting(!isSubmitting)
     } catch (error) {
 
     }
@@ -28,7 +31,10 @@ const index = () => {
       <div ref={ref} className={Styles.submenu_container}>
         <ul className={Styles.submenu_menu}>
           {data.map((el, key) => {
-            if (el.titulo === 'Cerrar sesión') return <button key={key} className={Styles.submenu_item} onClick={handleCerrarSesion} type="button">{el.titulo}</button>
+            if (el.titulo === 'Cerrar sesión')
+              return <button key={key} className={Styles.submenu_item} disabled={isSubmitting} onClick={handleCerrarSesion} type="button">
+                {isSubmitting ? <><span className={Styles.loader} /> Cerrando</> : el.titulo}
+              </button>
             return (
               <Link to={el.link} key={key} className={Styles.submenu_item}>
                 <div className={Styles.submenu_link}>
@@ -62,75 +68,77 @@ const index = () => {
   useOnClickOutside(ref, handleClickOutside)
 
   return (
-    <header className={Styles.container}>
-      <div className={Styles.logo_contenedor}>
-        <Link
-          to={'../'}
-          className={
-            location.pathname === '/'
-              ? `${Styles.listItem_logo_container} ${Styles.logo_selected}`
-              : `${Styles.listItem_logo_container} ${Styles.logo_no_selected}`
-          }
-        >
-          <span className={`${Styles.listItem_logo}`}>
-            <img className={Styles.logo} src='/logo-citas-v2.svg' alt='logo' />
-          </span>
-        </Link>
+    <header className={Styles.header_container}>
+      <div className={Styles.container}>
+        <div className={Styles.logo_contenedor}>
+          <Link
+            to={'../'}
+            className={
+              location.pathname === '/'
+                ? `${Styles.listItem_logo_container} ${Styles.logo_selected}`
+                : `${Styles.listItem_logo_container} ${Styles.logo_no_selected}`
+            }
+          >
+            <span className={`${Styles.listItem_logo}`}>
+              <img className={Styles.logo} src='/logo-citas-v2.svg' alt='logo' />
+            </span>
+          </Link>
+        </div>
+        <ul className={Styles.list}>
+          <Link
+            to={'../nuevos'}
+            className={
+              location.pathname === '/nuevos'
+                ? `${Styles.listItem} ${Styles.selected} Nuevos`
+                : `${Styles.listItem} ${Styles.no_selected} Nuevos`
+            }
+          >
+            <span className={`${Styles.listItem_nombre}`}>Nuevos</span>
+          </Link>
+          <Link
+            to={'../consultas'}
+            className={
+              location.pathname === '/consultas'
+                ? `${Styles.listItem} ${Styles.selected} Consultas`
+                : `${Styles.listItem} ${Styles.no_selected} Consultas`
+            }
+          >
+            <span className={`${Styles.listItem_nombre}`}>Consultas</span>
+          </Link>
+          <li
+            className={
+              location.pathname === '/perfil'
+                ? `${Styles.listItem} ${Styles.selected} Perfil`
+                : `${Styles.listItem} ${Styles.no_selected} Perfil`
+            }
+            onClick={handleAbrirSubmenu}
+          >
+            <User size={14} strokeWidth={3} className={Styles.listItem_icon} />
+            <span className={`${Styles.listItem_nombre}`}>Perfil</span>
+            <span className={`${Styles.btn_avatar}`}>
+              <ChevronDown size={14} strokeWidth={3} />
+            </span>
+            {submenuPerfil ? (
+              <Submenu
+                data={[
+                  {
+                    titulo: 'Mi Perfil',
+                    link: '../perfil',
+                  },
+                  {
+                    titulo: 'Usuarios',
+                    link: '../',
+                  },
+                  {
+                    titulo: 'Cerrar sesión',
+                    link: '../login',
+                  },
+                ]}
+              />
+            ) : null}
+          </li>
+        </ul>
       </div>
-      <ul className={Styles.list}>
-        <Link
-          to={'../nuevos'}
-          className={
-            location.pathname === '/nuevos'
-              ? `${Styles.listItem} ${Styles.selected} Nuevos`
-              : `${Styles.listItem} ${Styles.no_selected} Nuevos`
-          }
-        >
-          <span className={`${Styles.listItem_nombre}`}>Nuevos</span>
-        </Link>
-        <Link
-          to={'../consultas'}
-          className={
-            location.pathname === '/consultas'
-              ? `${Styles.listItem} ${Styles.selected} Consultas`
-              : `${Styles.listItem} ${Styles.no_selected} Consultas`
-          }
-        >
-          <span className={`${Styles.listItem_nombre}`}>Consultas</span>
-        </Link>
-        <li
-          className={
-            location.pathname === '/perfil'
-              ? `${Styles.listItem} ${Styles.selected} Perfil`
-              : `${Styles.listItem} ${Styles.no_selected} Perfil`
-          }
-          onClick={handleAbrirSubmenu}
-        >
-          <User size={14} strokeWidth={3} className={Styles.listItem_icon} />
-          <span className={`${Styles.listItem_nombre}`}>Perfil</span>
-          <span className={`${Styles.btn_avatar}`}>
-            <ChevronDown size={14} strokeWidth={3} />
-          </span>
-          {submenuPerfil ? (
-            <Submenu
-              data={[
-                {
-                  titulo: 'Mi Perfil',
-                  link: '../perfil',
-                },
-                {
-                  titulo: 'Usuarios',
-                  link: '../',
-                },
-                {
-                  titulo: 'Cerrar sesión',
-                  link: '../login',
-                },
-              ]}
-            />
-          ) : null}
-        </li>
-      </ul>
     </header>
   )
 }
