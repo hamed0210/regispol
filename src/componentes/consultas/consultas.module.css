@@ -1,5 +1,7 @@
 .notificacion_contenedor {
   margin-top: 40px;
+  min-width: 240px;
+  min-height: 200px;
 }
 
 .container {
@@ -70,6 +72,7 @@
   position: relative;
   display: flex;
   width: 280px;
+  min-height: 115px;
   margin: 15px;
   border-radius: 10px;
   background-color: white;
@@ -195,49 +198,94 @@ Modal
 
 .contenedor_modal {
   font-family: 'Antonio', sans-serif;
+  padding: 5px;
 }
 
-.icono_contenedor_modal {
+.titulo_contenedor_modal {
+  margin: 0;
+  margin-bottom: 10px;
+  font-family: "Righteous", system-ui;
+  color: #fca311;
+}
+
+.person_contenedor_modal {
+  border-bottom: 1px solid rgba(36, 36, 36, .2);
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.contenedor_horizontal_modal {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
-.icono_item_modal {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: rgba(255, 77, 109, 0.25);
+.contenedor_horizontal_modal .item_contenedor_modal:not(:last-child) {
+  margin-right: 30px;
 }
 
-.icono_modal {
-  color: #ff4d6d;
-}
-
-.contenido_contenedor_modal {
+.item_contenedor_modal {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 15px 0 15px;
+  margin-bottom: 15px;
 }
 
-.contenido_titulo_modal {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 5px;
+/* .item_contenedor_modal:not(:last-child) {
+} */
+
+.label_modal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #96a3af;
 }
 
-.contenido_modal {
-  font-weight: 300;
-  color: #495057;
+.item_modal {
+  margin: 0;
+}
+
+.btn_contenedor_modal {
+  display: flex;
+  margin-top: 15px;
 }
 
 .btn_modal {
   width: 100%;
-  padding: 4px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   color: white;
-  background-color: #ff4d6d;
+  transition: all 0.2s ease;
+}
+
+.btn_modal:not(:last-child) {
+  margin-right: 10px;
+}
+
+.btn_editar_modal {
+  background-color: #fca311;
+}
+
+.btn_editar_modal:hover {
+  background-color: #dc8e0f;
+}
+
+.btn_borrar_modal {
+  background-color: #ef233c;
+}
+
+.btn_borrar_modal:hover {
+  background-color: #c81c30;
+}
+
+.loader {
+  display: inline-flex;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #242424 94%, #0000) top/25px 25px no-repeat,
+    conic-gradient(#0000 30%, #242424);
+  /* -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0); */
+  animation: l13 1s infinite linear;
+}
+
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
 }

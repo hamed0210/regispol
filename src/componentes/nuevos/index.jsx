@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Styles from './nuevos.module.css'
 import { useColaboracionesStore } from '../../store/colaboracionesStore'
 
-z.config(z.locales.es()); 4
+z.config(z.locales.es());
 
 const zodSchema = z.object({
   tipo_id: z.string().min(1, { message: "Este campo es requrido" }),
@@ -25,10 +25,10 @@ const zodSchema = z.object({
 });
 
 const index = () => {
-  const { insertCollab, error, message } = useColaboracionesStore()
+  const { insertCollab } = useColaboracionesStore()
 
-  const notificacion = () =>
-    toast.success("Registro ingresado correctamente", {
+  const notificacionSuccess = () =>
+    toast.success('Registro creado con exito', {
       // className={Styles.notificacion},
       theme: "light",
       pauseOnHover: false,
@@ -38,6 +38,19 @@ const index = () => {
       //   hideProgressBar: false,
       autoClose: 3000,
     });
+
+  const notificacionError = () =>
+    toast.error('Error al ingresar registro', {
+      // className={Styles.notificacion},
+      theme: "light",
+      pauseOnHover: false,
+      pauseOnFocusLoss: false,
+      closeOnClick: true,
+      closeButton: false,
+      //   hideProgressBar: false,
+      autoClose: 3000,
+    });
+
 
   const {
     register,
@@ -60,18 +73,9 @@ const index = () => {
 
   const onSubmit = handleSubmit(async (datos) => {
     try {
-      insertCollab(datos)
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
-      // notificacion();
-      // datos.email === data.usuario ?
-      //     datos.password === data.contraseña
-      //         ? console.log("igaul") : notificacion()
-      //     : notificacion();
-
+      const res = await insertCollab(datos, { notificacionSuccess, notificacionError })
     } catch (error) {
-      // setError("root", {
-      //   message: "This email is already taken",
-      // });
+      console.log(error)
     }
   })
 

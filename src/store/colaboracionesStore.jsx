@@ -5,21 +5,19 @@ export const useColaboracionesStore = create((set, get) => ({
     colaboraciones: [],
     error: null,
     status: null,
-    message: '',
+    message: null,
+    loading: false,
 
-    insertCollab: async (props) => {
+    insertCollab: async (props, { notificacionSuccess, notificacionError }) => {
         const res = await insertarColaboracion(props)
-        if (res.error) return console.log(res.error)
-        // return (
-        //     res.error.code === '23505' && set({ error: 'Persona ya se encuentra ingresada' })
-        // )
-        console.log(res.data)
-        set({ message: 'Registro creado con exito' });
+        if (res.error) return notificacionError('Error al ingresar registro')
+        notificacionSuccess('Registro creado con exito')
     },
 
     getCollabs: async () => {
+        set({ loading: true })
         const response = await mostrarColaboraciones()
-        set({ colaboraciones: response });
+        set({ colaboraciones: response, loading: false });
     },
 
 })) 
