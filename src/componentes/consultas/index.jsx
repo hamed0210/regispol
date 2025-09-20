@@ -8,7 +8,7 @@ dayjs.locale('es');
 
 import Styles from './consultas.module.css'
 import { useColaboracionesStore } from '../../store/colaboracionesStore'
-import Modal from '../../hooks/modalHook'
+import ConsultasModal from '../modals/consultasModal'
 
 const index = () => {
   const [isModalOpen, setModalOpen] = useState(false)
@@ -106,66 +106,7 @@ const index = () => {
                 ))
           }
         </div>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => {
-            setModalOpen(false)
-          }}
-        >
-          <div className={Styles.contenedor_modal}>
-            <h2 className={Styles.titulo_contenedor_modal}>Detalle</h2>
-            <div className={Styles.person_contenedor_modal}>
-              <div className={Styles.item_contenedor_modal}>
-                <span className={Styles.label_modal}>Nombres</span>
-                <p className={Styles.item_modal}>Hamed Duran</p>
-              </div>
-              <div className={Styles.contenedor_horizontal_modal}>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>Tipo ID</span>
-                  <p className={Styles.item_modal}>CC</p>
-                </div>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>No. ID</span>
-                  <p className={Styles.item_modal}>1046814387</p>
-                </div>
-              </div>
-              <div className={Styles.contenedor_horizontal_modal}>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>Celular</span>
-                  <p className={Styles.item_modal}>3007725093</p>
-                </div>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>Direccion</span>
-                  <p className={Styles.item_modal}>Calle 5 # 3 - 45</p>
-                </div>
-              </div>
-              <div className={Styles.item_contenedor_modal}>
-                <span className={Styles.label_modal}>Email</span>
-                <p className={Styles.item_modal}>hduran0210@gmail.com</p>
-              </div>
-            </div>
-            <div className={Styles.colab_contenedor_modal}>
-              <div className={Styles.item_contenedor_modal}>
-                <span className={Styles.label_modal}>Colaboracion</span>
-                <p className={Styles.item_modal}>Entregados 100 mil Pesos</p>
-              </div>
-              <div className={Styles.contenedor_horizontal_modal}>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>Fecha de Entrega</span>
-                  <p className={Styles.item_modal}>10 Feb 2025</p>
-                </div>
-                <div className={Styles.item_contenedor_modal}>
-                  <span className={Styles.label_modal}>Entregado Por</span>
-                  <p className={Styles.item_modal}>Dimas</p>
-                </div>
-              </div>
-            </div>
-            <div className={Styles.btn_contenedor_modal}>
-              <button className={`${Styles.btn_modal} ${Styles.btn_editar_modal}`} type="button">Editar</button>
-              <button className={`${Styles.btn_modal} ${Styles.btn_borrar_modal}`} type="button">Borrar</button>
-            </div>
-          </div>
-        </Modal>
+        <ConsultasModal data={contentModal} isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
       </div>
     </>
   )

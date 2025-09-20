@@ -1,0 +1,93 @@
+.contenedor_modal {
+  font-family: 'Antonio', sans-serif;
+  padding: 5px;
+}
+
+.titulo_contenedor_modal {
+  margin: 0;
+  margin-bottom: 10px;
+  font-family: "Righteous", system-ui;
+  color: #fca311;
+}
+
+.person_contenedor_modal {
+  border-bottom: 1px solid rgba(36, 36, 36, .2);
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.contenedor_horizontal_modal {
+  display: flex;
+  width: 100%;
+}
+
+.contenedor_horizontal_modal .item_contenedor_modal:not(:last-child) {
+  margin-right: 30px;
+}
+
+.item_contenedor_modal {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* .item_contenedor_modal:not(:last-child) {
+} */
+
+.label_modal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #96a3af;
+}
+
+.item_modal {
+  margin: 0;
+}
+
+.btn_contenedor_modal {
+  display: flex;
+  margin-top: 15px;
+}
+
+.btn_modal {
+  width: 100%;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.btn_modal:not(:last-child) {
+  margin-right: 10px;
+}
+
+.btn_editar_modal {
+  background-color: #fca311;
+}
+
+.btn_editar_modal:hover {
+  background-color: #dc8e0f;
+}
+
+.btn_borrar_modal {
+  background-color: #ef233c;
+}
+
+.btn_borrar_modal:hover {
+  background-color: #c81c30;
+}
+
+.loader {
+  display: inline-flex;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #242424 94%, #0000) top/25px 25px no-repeat,
+    conic-gradient(#0000 30%, #242424);
+  /* -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0); */
+  animation: l13 1s infinite linear;
+}
+
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
