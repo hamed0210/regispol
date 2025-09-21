@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Trash } from 'lucide-react'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es';
 
@@ -18,16 +18,6 @@ const index = () => {
   useEffect(() => {
     getCollabs()
   }, [getCollabs]);
-
-  // const notificacion = () =>
-  //   toast.success('Cita eliminada con exito', {
-  //     theme: 'light',
-  //     pauseOnHover: false,
-  //     closeOnClick: true,
-  //     closeButton: false,
-  //     pauseOnFocusLoss: false,
-  //     autoClose: 3000,
-  //   })
 
   return (
     <>
@@ -93,14 +83,6 @@ const index = () => {
                         <span className={Styles.lista_item_resumen_titulo}>Colaboracion</span>
                         <span className={Styles.colaboracion}>{colab.collab}</span>
                       </p>
-                      {/* <span className={Styles.lista_item_resumen_boton}>
-                    <Trash
-                      onClick={handleAbrirModal}
-                      className={Styles.boton_borrar}
-                      size={16}
-                      strokeWidth={2.5}
-                    />
-                  </span> */}
                     </div>
                   </div>
                 ))

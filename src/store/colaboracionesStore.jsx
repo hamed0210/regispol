@@ -1,11 +1,8 @@
 import { create } from 'zustand'
-import { insertarColaboracion, mostrarColaboraciones, mostrarColaboracion } from '../supabase/crudColaboraciones'
+import { insertarColaboracion, mostrarColaboraciones, mostrarColaboracion, eliminarColaboracion } from '../supabase/crudColaboraciones'
 
 export const useColaboracionesStore = create((set, get) => ({
     colaboraciones: [],
-    error: null,
-    status: null,
-    message: null,
     loading: false,
 
     insertCollab: async (props, { notificacionSuccess, notificacionError }) => {
@@ -19,5 +16,20 @@ export const useColaboracionesStore = create((set, get) => ({
         const response = await mostrarColaboraciones()
         set({ colaboraciones: response, loading: false });
     },
+
+    deleteCollab: async (props, { notificacionSuccess, notificacionError }) => {
+        set({ loading: true })
+        const res = await eliminarColaboracion(props)
+        if (res.error) {
+            notificacionError('Error al elimiar registro')
+            set({ loading: false })
+            return
+        }
+        set((state) => ({
+            colaboraciones: state.colaboraciones.filter((colabs) => colabs.cod !== props),
+        }));
+        notificacionSuccess('Registro Eliminado correctamente')
+        set({ loading: false });
+    }
 
 })) 

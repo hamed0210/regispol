@@ -107,7 +107,7 @@ const consultasModal = ({ data, isModalOpen, setModalOpen }) => {
           </div>
         </div>
       </Modal>
-      <BorrarModal data={data} isModalBorrarOpen={isModalBorrarOpen} setModalBorrarOpen={setModalBorrarOpen} />
+      <BorrarModal data={data} setModalOpenConsultas={setModalOpen} isModalBorrarOpen={isModalBorrarOpen} setModalBorrarOpen={setModalBorrarOpen} />
     </>
   )
 }

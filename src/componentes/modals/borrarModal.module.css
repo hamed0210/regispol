@@ -52,6 +52,11 @@
   color: white;
 }
 
+.btn_modal:disabled {
+  pointer-events: none;
+  /* background-color: #adb5bd; */
+}
+
 .btn_modal:not(:last-child) {
   margin-right: 10px;
 }
@@ -66,10 +71,11 @@
 
 .loader {
   display: inline-flex;
-  width: 50px;
+  width: 15px;
+  margin-right: 5px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #242424 94%, #0000) top/25px 25px no-repeat,
+  background: radial-gradient(farthest-side, #242424 94%, #0000) top/4px 4px no-repeat,
     conic-gradient(#0000 30%, #242424);
   /* -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0); */
   animation: l13 1s infinite linear;

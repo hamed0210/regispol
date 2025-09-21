@@ -66,9 +66,8 @@ export const actualizarColaboracion = async (colab) => {
 
 export const eliminarColaboracion = async (colab) => {
     try {
-        const { error, data } = await supabase.from("collabs").delete().eq("cod", colab);
-        if (error) return null
-        if (data) return data;
+        const res = await supabase.from("collabs").delete().eq("cod", colab);
+        return res
     } catch (error) {
         console.log(error)
     }

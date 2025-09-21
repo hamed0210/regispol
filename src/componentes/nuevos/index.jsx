@@ -27,8 +27,8 @@ const zodSchema = z.object({
 const index = () => {
   const { insertCollab } = useColaboracionesStore()
 
-  const notificacionSuccess = () =>
-    toast.success('Registro creado con exito', {
+  const notificacionSuccess = (message) =>
+    toast.success(message, {
       // className={Styles.notificacion},
       theme: "light",
       pauseOnHover: false,
@@ -39,8 +39,8 @@ const index = () => {
       autoClose: 3000,
     });
 
-  const notificacionError = () =>
-    toast.error('Error al ingresar registro', {
+  const notificacionError = (message) =>
+    toast.error(message, {
       // className={Styles.notificacion},
       theme: "light",
       pauseOnHover: false,
