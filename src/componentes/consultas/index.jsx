@@ -11,6 +11,7 @@ import { useColaboracionesStore } from '../../store/colaboracionesStore'
 import ConsultasModal from '../modals/consultasModal'
 
 const index = () => {
+  const [searchInput, setSearchInput] = useState('')
   const [isModalOpen, setModalOpen] = useState(false)
   const [contentModal, setContentModal] = useState(null)
   const { getCollabs, colaboraciones, loading } = useColaboracionesStore()
@@ -18,6 +19,23 @@ const index = () => {
   useEffect(() => {
     getCollabs()
   }, [getCollabs]);
+
+  const filteredItems = colaboraciones.filter(item => {
+    // 1. Convertimos el texto del input a minúsculas, eliminamos espacios extras y lo dividimos por espacios
+    const terms = searchInput.toLowerCase().trim().split(' ').filter(Boolean) // .filter(Boolean) eliminamos términos vacíos (por si hay doble espacio o input vacío)
+    // 2. Filtramos las colaboraciones que cumplan con TODOS los términos de búsqueda
+    return terms.every(term =>
+      // Verificamos si el término está contenido en alguno de los siguientes campos:
+      item.persons.names.toLowerCase().includes(term) || item.persons.surnames.toLowerCase().includes(term) || item.persons.id.toString().toLowerCase().includes(term)
+    )
+  });
+
+  const handleBuscar = (e) => {
+    colaboraciones.filter(item =>
+      item.persons.names.toLowerCase().includes(e.target.value.toLowerCase())
+    )
+    console.log(colaboraciones)
+  }
 
   return (
     <>
@@ -42,6 +60,7 @@ const index = () => {
             <input
               className={Styles.input}
               type='text'
+              onChange={(e) => setSearchInput(e.target.value)}
               placeholder='Buscar'
             />
           </div>
@@ -52,7 +71,7 @@ const index = () => {
               ? <div className={Styles.loader_container}><span className={Styles.loader} /></div>
               : !colaboraciones
                 ? <p className={Styles.no_resgistros_container}>No hay registros guardados</p>
-                : colaboraciones.map((colab) => (
+                : filteredItems.map((colab) => (
                   <div
                     key={colab.cod}
                     className={Styles.lista_item}
