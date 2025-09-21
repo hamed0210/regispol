@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Trash } from 'lucide-react'
 import { ToastContainer } from 'react-toastify'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es';
@@ -20,7 +19,7 @@ const index = () => {
     getCollabs()
   }, [getCollabs]);
 
-  const filteredItems = colaboraciones.filter(item => {
+  const filteredColaboraciones = colaboraciones.filter(item => {
     // 1. Convertimos el texto del input a minúsculas, eliminamos espacios extras y lo dividimos por espacios
     const terms = searchInput.toLowerCase().trim().split(' ').filter(Boolean) // .filter(Boolean) eliminamos términos vacíos (por si hay doble espacio o input vacío)
     // 2. Filtramos las colaboraciones que cumplan con TODOS los términos de búsqueda
@@ -71,7 +70,7 @@ const index = () => {
               ? <div className={Styles.loader_container}><span className={Styles.loader} /></div>
               : !colaboraciones
                 ? <p className={Styles.no_resgistros_container}>No hay registros guardados</p>
-                : filteredItems.map((colab) => (
+                : filteredColaboraciones.map((colab) => (
                   <div
                     key={colab.cod}
                     className={Styles.lista_item}
