@@ -1,17 +1,17 @@
-import { useRef } from 'react'
+// import { useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { useOnClickOutside } from 'usehooks-ts'
+// import { useOnClickOutside } from 'usehooks-ts'
 
 import Styles from './modalHook.module.css'
 
-const modalHook = ({ isOpen, onClose, children }) => {
-  const refModal = useRef()
+const modalHook = ({ isOpen, children }) => {
+  // const refModal = useRef()
 
-  const handleClickOutside = () => {
-    onClose()
-  }
+  // const handleClickOutside = () => {
+  //   onClose()
+  // }
 
-  useOnClickOutside(refModal, handleClickOutside)
+  // useOnClickOutside(refModal, handleClickOutside)
 
   if (!isOpen) return null
 
@@ -33,7 +33,9 @@ const modalHook = ({ isOpen, onClose, children }) => {
         zIndex: 2,
       }}
     >
-      <div className={Styles.modal} ref={refModal}>
+      <div className={Styles.modal}
+      // ref={refModal}
+      >
         <div className={Styles.children_container}>{children}</div>
       </div>
     </div>,
