@@ -102,7 +102,7 @@ const consultasModal = ({ data, isModalOpen, setModalOpen }) => {
             </div>
           </div>
           <div className={Styles.btn_contenedor_modal}>
-            <button className={`${Styles.btn_modal} ${Styles.btn_editar_modal}`} type="button" >Editar</button>
+            {/* <button className={`${Styles.btn_modal} ${Styles.btn_editar_modal}`} type="button" >Editar</button> */}
             <button className={`${Styles.btn_modal} ${Styles.btn_borrar_modal}`} type="button" onClick={handleBorrar}>Borrar</button>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import { Link, useLocation } from 'react-router-dom'
-import { DynamicIcon } from 'lucide-react/dynamic'
 import {
   ChevronDown,
   User,
 } from 'lucide-react'
 
 import Styles from './header.module.css'
+import Logo from '../../assets/logo.svg'
 import { supabase } from '../../supabase/supabase.config'
 
 const index = () => {
@@ -80,7 +80,7 @@ const index = () => {
             }
           >
             <span className={`${Styles.listItem_logo}`}>
-              <img className={Styles.logo} src='/logo-citas-v2.svg' alt='logo' />
+              <img className={Styles.logo} src={Logo} alt='logo' />
             </span>
           </Link>
         </div>
@@ -121,14 +121,14 @@ const index = () => {
             {submenuPerfil ? (
               <Submenu
                 data={[
-                  {
-                    titulo: 'Mi Perfil',
-                    link: '../perfil',
-                  },
-                  {
-                    titulo: 'Usuarios',
-                    link: '../',
-                  },
+                  // {
+                  //   titulo: 'Mi Perfil',
+                  //   link: '../perfil',
+                  // },
+                  // {
+                  //   titulo: 'Usuarios',
+                  //   link: '../',
+                  // },
                   {
                     titulo: 'Cerrar sesión',
                     link: '../login',

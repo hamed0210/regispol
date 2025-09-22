@@ -29,7 +29,7 @@ function App() {
         loadingState
           ? <>
             <Header />
-            <Main />
+            <Main session={sessionUser} />
           </>
           : <Routes><Route path='/login' element={<Login />} /></Routes>
       }

@@ -16,7 +16,6 @@ const borrarModal = ({ data, setModalOpenConsultas, isModalBorrarOpen, setModalB
       pauseOnFocusLoss: false,
       closeOnClick: true,
       closeButton: false,
-      pauseOnFocusLoss: false,
       autoClose: 3000,
     })
 
@@ -27,7 +26,6 @@ const borrarModal = ({ data, setModalOpenConsultas, isModalBorrarOpen, setModalB
       pauseOnFocusLoss: false,
       closeOnClick: true,
       closeButton: false,
-      pauseOnFocusLoss: false,
       autoClose: 3000,
     })
 

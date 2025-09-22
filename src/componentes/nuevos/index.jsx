@@ -157,62 +157,66 @@ const index = () => {
                 <span className={Styles.error_label}>{errors.id.message}</span>
               )}
             </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                type='text'
-                disabled={isDisableInput}
-                {...register('nombres')}
-              // value={filteredPersonas ? filteredPersonas.names : ''}
-              />
-              <span className={Styles.label}>Nombres</span>
-              <Asterisk size={14} className={Styles.icon_requerido} />
-              {errors.nombres && (
-                <span className={Styles.error_label}>{errors.nombres.message}</span>
-              )}
+            <div className={Styles.inputGroup_horizontal}>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  type='text'
+                  disabled={isDisableInput}
+                  {...register('nombres')}
+                // value={filteredPersonas ? filteredPersonas.names : ''}
+                />
+                <span className={Styles.label}>Nombres</span>
+                <Asterisk size={14} className={Styles.icon_requerido} />
+                {errors.nombres && (
+                  <span className={Styles.error_label}>{errors.nombres.message}</span>
+                )}
+              </div>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  disabled={isDisableInput}
+                  type='text'
+                  {...register('apellidos')}
+                // value={filteredPersonas ? filteredPersonas.surnames : ''}
+                />
+                <span className={Styles.label}>Apellidos</span>
+                <Asterisk size={14} className={Styles.icon_requerido} />
+                {errors.apellidos && (
+                  <span className={Styles.error_label}>{errors.apellidos.message}</span>
+                )}
+              </div>
             </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                disabled={isDisableInput}
-                type='text'
-                {...register('apellidos')}
-              // value={filteredPersonas ? filteredPersonas.surnames : ''}
-              />
-              <span className={Styles.label}>Apellidos</span>
-              <Asterisk size={14} className={Styles.icon_requerido} />
-              {errors.apellidos && (
-                <span className={Styles.error_label}>{errors.apellidos.message}</span>
-              )}
-            </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                disabled={isDisableInput}
-                type='text'
-                {...register('direccion')}
-              // value={filteredPersonas ? filteredPersonas.address : ''}
-              />
-              <span className={Styles.label}>Direccion</span>
-              <Asterisk size={14} className={Styles.icon_requerido} />
-              {errors.direccion && (
-                <span className={Styles.error_label}>{errors.direccion.message}</span>
-              )}
-            </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                disabled={isDisableInput}
-                type='number'
-                min={1}
-                {...register('celular')}
-              // value={filteredPersonas ? filteredPersonas.cel : ''}
-              />
-              <span className={Styles.label}>Celular</span>
-              <Asterisk size={14} className={Styles.icon_requerido} />
-              {errors.celular && (
-                <span className={Styles.error_label}>{errors.celular.message}</span>
-              )}
+            <div className={Styles.inputGroup_horizontal}>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  disabled={isDisableInput}
+                  type='text'
+                  {...register('direccion')}
+                // value={filteredPersonas ? filteredPersonas.address : ''}
+                />
+                <span className={Styles.label}>Direccion</span>
+                <Asterisk size={14} className={Styles.icon_requerido} />
+                {errors.direccion && (
+                  <span className={Styles.error_label}>{errors.direccion.message}</span>
+                )}
+              </div>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  disabled={isDisableInput}
+                  type='number'
+                  min={1}
+                  {...register('celular')}
+                // value={filteredPersonas ? filteredPersonas.cel : ''}
+                />
+                <span className={Styles.label}>Celular</span>
+                <Asterisk size={14} className={Styles.icon_requerido} />
+                {errors.celular && (
+                  <span className={Styles.error_label}>{errors.celular.message}</span>
+                )}
+              </div>
             </div>
             <div className={Styles.inputGroup}>
               <input
@@ -238,28 +242,30 @@ const index = () => {
                 <span className={Styles.error_label}>{errors.colaboracion.message}</span>
               )}
             </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                type='date'
-                {...register('fecha_colaboracion')}
-              />
-              <span className={Styles.label}>Fecha Colaboracion</span>
-              {errors.fecha_colaboracion && (
-                <span className={Styles.error_label}>{errors.fecha_colaboracion.message}</span>
-              )}
-            </div>
-            <div className={Styles.inputGroup}>
-              <input
-                className={Styles.input}
-                type='text'
-                {...register('entregado_por')}
-              />
-              <span className={Styles.label}>Entregado Por</span>
-              <Asterisk size={14} className={Styles.icon_requerido} />
-              {errors.entregado_por && (
-                <span className={Styles.error_label}>{errors.entregado_por.message}</span>
-              )}
+            <div className={Styles.inputGroup_horizontal}>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  type='date'
+                  {...register('fecha_colaboracion')}
+                />
+                <span className={Styles.label}>Fecha Colaboracion</span>
+                {errors.fecha_colaboracion && (
+                  <span className={Styles.error_label}>{errors.fecha_colaboracion.message}</span>
+                )}
+              </div>
+              <div className={Styles.inputGroup}>
+                <input
+                  className={Styles.input}
+                  type='text'
+                  {...register('entregado_por')}
+                />
+                <span className={Styles.label}>Entregado Por</span>
+                <Asterisk size={14} className={Styles.icon_requerido} />
+                {errors.entregado_por && (
+                  <span className={Styles.error_label}>{errors.entregado_por.message}</span>
+                )}
+              </div>
             </div>
             <button
               className={Styles.button}

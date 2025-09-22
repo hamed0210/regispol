@@ -46,7 +46,7 @@ const index = () => {
       <div className={Styles.container}>
         <h2 className={Styles.titulo}>Consultas</h2>
         <div className={Styles.busqueda_contenedor}>
-          <div className={Styles.fechas_busqueda_contenedor}>
+          {/* <div className={Styles.fechas_busqueda_contenedor}>
             <span className={Styles.fecha_busqueda_titulo}>
               Buscar por rango
             </span>
@@ -54,7 +54,7 @@ const index = () => {
               <input className={Styles.input} type='date' />
               <input className={Styles.input} type='date' />
             </div>
-          </div>
+          </div> */}
           <div>
             <input
               className={Styles.input}
