@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { Asterisk } from 'lucide-react'
 import { ToastContainer, toast } from "react-toastify";
@@ -6,26 +7,33 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import Styles from './nuevos.module.css'
 import { useColaboracionesStore } from '../../store/colaboracionesStore'
+import { usePersonasStore } from '../../store/personasStore'
 
 z.config(z.locales.es());
 
 const zodSchema = z.object({
   tipo_id: z.string().min(1, { message: "Este campo es requrido" }),
-  id: z.string().min(1, { message: "Este campo es requrido" }).max(10, { message: "Debe tener maximo de 10 caracteres" }),
-  nombres: z.string().min(1, { message: "Este campo es requrido" }),
-  apellidos: z.string().min(1, { message: "Este campo es requrido" }),
-  direccion: z.string().min(1, { message: "Este campo es requrido" }),
-  celular: z.string().min(1, { message: "Este campo es requrido" }),
+  id: z.string().min(1, { message: "Este campo es requrido" }).min(6, { message: "Debe tener minimo de 6 caracteres" }).max(10, { message: "Debe tener maximo de 10 caracteres" }),
+  nombres: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
+  apellidos: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
+  direccion: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
+  celular: z.string().min(1, { message: "Este campo es requrido" }).min(6, { message: "Debe tener 10 caracteres" }).max(10, { message: "Debe tener maximo de 10 caracteres" }),
   email: z.email().toLowerCase().trim().nullable(),
   colaboracion: z.string().nullable(),
   fecha_colaboracion: z.string().nullable(),
-  entregado_por: z.string().min(1, { message: "Este campo es requrido" }),
+  entregado_por: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
   // password: z
   //   .string().regex(/^[a-z]+$/).trim()
 });
 
 const index = () => {
   const { insertCollab } = useColaboracionesStore()
+  const { getPersons, personas } = usePersonasStore()
+  const [isDisableInput, setIsDisableInput] = useState(false)
+
+  useEffect(() => {
+    getPersons()
+  }, [getPersons])
 
   const notificacionSuccess = (message) =>
     toast.success(message, {
@@ -55,27 +63,67 @@ const index = () => {
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
+    reset,
     formState: { errors, isSubmitting }
   } = useForm({
     defaultValues: {
-      id: '1046814387',
-      nombres: 'Hamed',
-      apellidos: 'Duran',
-      direccion: 'Calle 5 # 3 - 45',
-      celular: '3007725093',
+      id: '',
+      nombres: '',
+      apellidos: '',
+      direccion: '',
+      celular: '',
       email: null,
       colaboracion: null,
       fecha_colaboracion: null,
-      entregado_por: 'Dimas',
+      entregado_por: '',
     }, resolver: zodResolver(zodSchema),
   })
+
+  const inputId = watch('id', '')
+
+  useEffect(() => {
+    if (!inputId) return;
+
+    const match = personas.find(item => item.id.toString().toLowerCase() === inputId);
+
+    setIsDisableInput(true)
+
+    if (match) {
+      reset({
+        tipo_id: match.type_id,
+        nombres: match.names,
+        apellidos: match.surnames,
+        direccion: match.address,
+        celular: match.cel.toString(),
+        email: match.email,
+        fecha_colaboracion: null,
+      });
+    } else {
+      setIsDisableInput(false)
+    }
+  }, [inputId, personas, reset])
+
 
   const onSubmit = handleSubmit(async (datos) => {
     try {
       const res = await insertCollab(datos, { notificacionSuccess, notificacionError })
     } catch (error) {
       console.log(error)
+    } finally {
+      reset({
+        tipo_id: 'CC',
+        id: '',
+        nombres: '',
+        apellidos: '',
+        direccion: '',
+        celular: '',
+        email: null,
+        colaboracion: null,
+        fecha_colaboracion: null,
+        entregado_por: '',
+      });
+      setIsDisableInput(false)
     }
   })
 
@@ -91,7 +139,7 @@ const index = () => {
         <form className={Styles.form} onSubmit={onSubmit}>
           <div className={Styles.personal_data}>
             <div className={Styles.inputGroup}>
-              <select className={Styles.input_select} name='tipo_id' id='tipo_id' {...register('tipo_id')}>
+              <select className={Styles.input_select} name='tipo_id' id='tipo_id' disabled={isDisableInput} {...register('tipo_id')}>
                 <option value='CC'>Cedula de ciudadania</option>
                 <option value='TI'>Tarjeta de identidad</option>
                 <option value='PPT'>Permiso de proteccion temporal</option>
@@ -113,7 +161,9 @@ const index = () => {
               <input
                 className={Styles.input}
                 type='text'
+                disabled={isDisableInput}
                 {...register('nombres')}
+              // value={filteredPersonas ? filteredPersonas.names : ''}
               />
               <span className={Styles.label}>Nombres</span>
               <Asterisk size={14} className={Styles.icon_requerido} />
@@ -124,8 +174,10 @@ const index = () => {
             <div className={Styles.inputGroup}>
               <input
                 className={Styles.input}
+                disabled={isDisableInput}
                 type='text'
                 {...register('apellidos')}
+              // value={filteredPersonas ? filteredPersonas.surnames : ''}
               />
               <span className={Styles.label}>Apellidos</span>
               <Asterisk size={14} className={Styles.icon_requerido} />
@@ -136,8 +188,10 @@ const index = () => {
             <div className={Styles.inputGroup}>
               <input
                 className={Styles.input}
+                disabled={isDisableInput}
                 type='text'
                 {...register('direccion')}
+              // value={filteredPersonas ? filteredPersonas.address : ''}
               />
               <span className={Styles.label}>Direccion</span>
               <Asterisk size={14} className={Styles.icon_requerido} />
@@ -148,8 +202,11 @@ const index = () => {
             <div className={Styles.inputGroup}>
               <input
                 className={Styles.input}
+                disabled={isDisableInput}
                 type='number'
+                min={1}
                 {...register('celular')}
+              // value={filteredPersonas ? filteredPersonas.cel : ''}
               />
               <span className={Styles.label}>Celular</span>
               <Asterisk size={14} className={Styles.icon_requerido} />
@@ -160,8 +217,10 @@ const index = () => {
             <div className={Styles.inputGroup}>
               <input
                 className={Styles.input}
+                disabled={isDisableInput}
                 type='text'
                 {...register('email')}
+              // value={filteredPersonas ? filteredPersonas.email : ''}
               />
               <span className={Styles.label}>Email</span>
               {errors.email && (

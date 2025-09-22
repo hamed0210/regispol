@@ -101,11 +101,20 @@
   border-color: #ca7f07;
 }
 
+.input_select:disabled,
+.input:disabled {
+  background-color: #e9ecef;
+}
+
 /* .input:valid~.label, */
 .input:focus~.label {
   /* font-weight: 500; */
   color: #ca7f07;
   /* transform: translateY(-1.438rem) translateX(-0.625rem) scale(.8); */
+}
+
+.input[type="date"] {
+  cursor: pointer;
 }
 
 .button {

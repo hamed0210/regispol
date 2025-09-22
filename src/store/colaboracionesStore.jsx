@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { insertarColaboracion, mostrarColaboraciones, mostrarColaboracion, eliminarColaboracion } from '../supabase/crudColaboraciones'
+import { insertarColaboracion, mostrarColaboraciones, eliminarColaboracion } from '../supabase/crudColaboraciones'
+import { usePersonasStore } from './personasStore'
 
 export const useColaboracionesStore = create((set, get) => ({
     colaboraciones: [],
@@ -8,6 +9,8 @@ export const useColaboracionesStore = create((set, get) => ({
     insertCollab: async (props, { notificacionSuccess, notificacionError }) => {
         const res = await insertarColaboracion(props)
         if (res.error) return notificacionError('Error al ingresar registro')
+        const personasUpdate = usePersonasStore.getState()
+        personasUpdate.getPersons()
         notificacionSuccess('Registro creado con exito')
     },
 
