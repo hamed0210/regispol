@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import './App.css'
@@ -16,10 +16,14 @@ function App() {
   const navigate = useNavigate()
   const [loadingState, setLoadingState] = useState(true)
 
+  const location = useLocation();
+  const { pathname } = location;
+
   useEffect(() => {
     if (sessionUser) {
       setLoadingState(true)
-      navigate('/nuevos', { replace: true })
+      pathname === '/login' && navigate('/nuevos', { replace: true })
+      pathname === '/consultas' && navigate(null)
     } else {
       setLoadingState(false)
       navigate('/login', { replace: true })

@@ -29,13 +29,6 @@ const index = () => {
     )
   });
 
-  const handleBuscar = (e) => {
-    colaboraciones.filter(item =>
-      item.persons.names.toLowerCase().includes(e.target.value.toLowerCase())
-    )
-    console.log(colaboraciones)
-  }
-
   return (
     <>
       <ToastContainer
@@ -68,7 +61,7 @@ const index = () => {
           {
             loading
               ? <div className={Styles.loader_container}><span className={Styles.loader} /></div>
-              : !colaboraciones
+              : colaboraciones.length === 0
                 ? <p className={Styles.no_resgistros_container}>No hay registros guardados</p>
                 : filteredColaboraciones.map((colab) => (
                   <div

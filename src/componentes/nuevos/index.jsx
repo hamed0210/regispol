@@ -13,11 +13,11 @@ z.config(z.locales.es());
 
 const zodSchema = z.object({
   tipo_id: z.string().min(1, { message: "Este campo es requrido" }),
-  id: z.string().min(1, { message: "Este campo es requrido" }).min(6, { message: "Debe tener minimo de 6 caracteres" }).max(10, { message: "Debe tener maximo de 10 caracteres" }),
+  id: z.string().min(1, { message: "Este campo es requrido" }).min(6, { message: "Debe tener minimo de 6 caracteres" }).max(10, { message: "Debe tener 10 caracteres" }),
   nombres: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
   apellidos: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
   direccion: z.string().min(1, { message: "Este campo es requrido" }).min(3, { message: "Debe tener minimo de 3 caracteres" }),
-  celular: z.string().min(1, { message: "Este campo es requrido" }).min(6, { message: "Debe tener 10 caracteres" }).max(10, { message: "Debe tener maximo de 10 caracteres" }),
+  celular: z.string().min(1, { message: "Este campo es requrido" }).min(10, { message: "Debe tener 10 caracteres" }).max(10, { message: "Debe tener 10 caracteres" }),
   email: z.email().toLowerCase().trim().nullable(),
   colaboracion: z.string().nullable(),
   fecha_colaboracion: z.string().nullable(),

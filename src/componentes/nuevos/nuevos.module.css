@@ -55,8 +55,9 @@
 .error_label {
   position: absolute;
   right: 10px;
-  top: -25px;
-  font-size: 14px;
+  top: -20px;
+  font-size: 13px;
+  text-align: right;
   color: #c53a3e;
 }
 
@@ -176,14 +177,22 @@
   }
 
   .inputGroup_horizontal .inputGroup {
-    position: relative;
     display: flex;
     flex-direction: column;
+    width: 45%;
   }
 
   .inputGroup_horizontal .inputGroup:not(:last-child) {
     margin: 0;
     margin-right: 1.7rem;
+  }
+
+  .error_label {
+    width: 70px;
+    right: 5px;
+    top: -20px;
+    font-size: 10px;
+    line-height: .9;
   }
 }
 
@@ -198,5 +207,13 @@
   .form {
     /* 31.188rem = 499px */
     max-width: 31.188rem;
+  }
+
+  .error_label {
+    width: fit-content;
+    right: 5px;
+    top: -18px;
+    font-size: 13px;
+    line-height: .9;
   }
 }
