@@ -164,7 +164,9 @@
   }
 }
 
-@media (min-width: 430px) {
+/* 26.875rem = 430px */
+
+@media (min-width: 26.875rem) {
 
   /* Estilos para móviles normales */
   .inputGroup_horizontal {
@@ -188,10 +190,13 @@
 /* ================================
    📱 Teléfonos medianos: 576px - 767.98px
    ================================ */
-@media (min-width: 576px) {
+
+/* 36rem = 576px */
+@media (min-width: 36rem) {
 
   /* Estilos para móviles normales */
   .form {
-    max-width: 499px;
+    /* 31.188rem = 499px */
+    max-width: 31.188rem;
   }
 }

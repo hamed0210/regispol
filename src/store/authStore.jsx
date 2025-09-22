@@ -9,7 +9,6 @@ export const useAuthStore = create((set, get) => {
                 email: dataProps.email,
                 password: dataProps.password,
             })
-            if (data) navigate('/nuevos')
             if (error) return null
         } catch (error) {
 

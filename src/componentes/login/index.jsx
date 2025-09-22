@@ -42,8 +42,8 @@ const index = () => {
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
-            email: 'hduran0210@gmail.com',
-            password: '910210Vaquero'
+            email: '',
+            password: ''
         },
         resolver: zodResolver(zodSchema),
     });

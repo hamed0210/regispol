@@ -1,8 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom"
+import { UserAuth } from '../context/AuthContext'
+import Main from '../componentes/main'
 
-export const protectedRoute = ({ session, redirectTo, children }) => {
+export const protectedRoute = ({ redirectTo, children }) => {
+    const session = UserAuth()
     if (session === null) return <Navigate replace to={redirectTo} />
-    return children ? children : <Outlet />
+    return <Main>{children ? children : <Outlet />}</Main>
 }
 
 export default protectedRoute

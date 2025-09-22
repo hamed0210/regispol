@@ -5,18 +5,19 @@ import Nuevos from '../nuevos'
 import Consultas from '../consultas'
 import ProtectedRoute from '../../hooks/protectedRoute'
 
-function Main(session) {
+function Main({ children }) {
 
   return (
     <div className={Styles.container}>
-      <Routes>
-        <Route element={<ProtectedRoute session={session} redirectTo="/login" />}>
-          <Route path='/' element={<Navigate to={'../nuevos'} />} />
-          <Route path='*' element={<Navigate to={'../nuevos'} />} />
+      {children}
+      {/* <Routes>
+        <Route element={<ProtectedRoute redirectTo="/login" />}>
+          <Route path='/' element={<Navigate to={'/nuevos'} replace />} />
+          <Route path='*' element={<Navigate to={'../nuevos'} replace />} />
           <Route path='/nuevos' element={<Nuevos />} />
           <Route path='/consultas' element={<Consultas />} />
         </Route>
-      </Routes>
+      </Routes> */}
     </div>
   )
 }

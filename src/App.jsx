@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import './App.css'
@@ -6,6 +6,10 @@ import Login from './componentes/login'
 import Header from './componentes/header'
 import Main from './componentes/main'
 import { UserAuth } from './context/AuthContext'
+
+import Nuevos from './componentes/nuevos'
+import Consultas from './componentes/consultas'
+import ProtectedRoute from './hooks/protectedRoute'
 
 function App() {
   const sessionUser = UserAuth()
@@ -15,10 +19,10 @@ function App() {
   useEffect(() => {
     if (sessionUser) {
       setLoadingState(true)
-      // navigate('/nuevos')  
+      navigate('/nuevos', { replace: true })
     } else {
       setLoadingState(false)
-      navigate('/login')
+      navigate('/login', { replace: true })
     }
   }, [sessionUser])
 
@@ -26,12 +30,18 @@ function App() {
   return (
     <>
       {
-        loadingState
-          ? <>
-            <Header />
-            <Main session={sessionUser} />
-          </>
-          : <Routes><Route path='/login' element={<Login />} /></Routes>
+        <>
+          {sessionUser && <Header />}
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route element={<ProtectedRoute redirectTo="/login" />}>
+              <Route path='/' element={<Navigate to={'/nuevos'} replace />} />
+              <Route path='*' element={<Navigate to={'../nuevos'} replace />} />
+              <Route path='/nuevos' element={<Nuevos />} />
+              <Route path='/consultas' element={<Consultas />} />
+            </Route>
+          </Routes>
+        </>
       }
     </>
 

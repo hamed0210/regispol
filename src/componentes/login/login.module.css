@@ -9,6 +9,7 @@
     padding: 30px;
     font-family: "Antonio", sans-serif;
     box-sizing: border-box;
+    max-width: 500px;
 }
 
 .logo_contenedor {
@@ -59,7 +60,6 @@
     margin-left: 0.938rem;
     pointer-events: none;
     transform: translateY(-145%);
-    color: #ffffff;
     font-size: 14px;
 }
 
@@ -88,9 +88,10 @@
     border-color: #adb5bd;
 }
 
+/* 
 .input:focus~.labelGroup {
     color: #adb5bd;
-}
+} */
 
 .input:disabled~.contraseña_eye_contenedor {
     pointer-events: none;
